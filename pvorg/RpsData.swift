@@ -119,7 +119,7 @@ class RpsDataViewModel: ObservableObject {
         self.data.selectedTags = Set()
         self.data.combinations = getCombinations(rpsData: self.data)
         self.data.combinationIndex = 0
-        print(self.data.combinations)
+        print("LOADED")
     }
 }
 

@@ -12,16 +12,20 @@
 		AAC239FB2C8053D20098CA72 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAC239FA2C8053D20098CA72 /* ContentView.swift */; };
 		AAC239FD2C8053D30098CA72 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AAC239FC2C8053D30098CA72 /* Assets.xcassets */; };
 		AAC23A002C8053D30098CA72 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AAC239FF2C8053D30098CA72 /* Preview Assets.xcassets */; };
+		AAF1E0A12C80F58F00E60D65 /* ViewTabContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF1E0A02C80F58F00E60D65 /* ViewTabContentView.swift */; };
+		AAF1E0A32C80F75500E60D65 /* ConfigTabContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF1E0A22C80F75500E60D65 /* ConfigTabContentView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		AA5A5C1C2C8079390022774C /* RpsData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RpsData.swift; sourceTree = "<group>"; };
 		AAC239F52C8053D20098CA72 /* pvorg.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = pvorg.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AAC239F82C8053D20098CA72 /* pvorgApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pvorgApp.swift; sourceTree = "<group>"; };
-		AAC239FA2C8053D20098CA72 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		AAC239FA2C8053D20098CA72 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; tabWidth = 4; };
 		AAC239FC2C8053D30098CA72 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AAC239FF2C8053D30098CA72 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		AAC23A012C8053D30098CA72 /* pvorg.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = pvorg.entitlements; sourceTree = "<group>"; };
+		AAF1E0A02C80F58F00E60D65 /* ViewTabContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewTabContentView.swift; sourceTree = "<group>"; };
+		AAF1E0A22C80F75500E60D65 /* ConfigTabContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigTabContentView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +64,8 @@
 				AAC23A012C8053D30098CA72 /* pvorg.entitlements */,
 				AAC239FE2C8053D30098CA72 /* Preview Content */,
 				AA5A5C1C2C8079390022774C /* RpsData.swift */,
+				AAF1E0A02C80F58F00E60D65 /* ViewTabContentView.swift */,
+				AAF1E0A22C80F75500E60D65 /* ConfigTabContentView.swift */,
 			);
 			path = pvorg;
 			sourceTree = "<group>";
@@ -144,7 +150,9 @@
 			files = (
 				AAC239FB2C8053D20098CA72 /* ContentView.swift in Sources */,
 				AA5A5C1D2C8079390022774C /* RpsData.swift in Sources */,
+				AAF1E0A32C80F75500E60D65 /* ConfigTabContentView.swift in Sources */,
 				AAC239F92C8053D20098CA72 /* pvorgApp.swift in Sources */,
+				AAF1E0A12C80F58F00E60D65 /* ViewTabContentView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

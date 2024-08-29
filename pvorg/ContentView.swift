@@ -4,21 +4,22 @@ struct ContentView: View {
     @EnvironmentObject var rpsData: RpsDataViewModel
 
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text(rpsData.data.getCurrentCombination().galleryName)
-            Button(action: {
-                rpsData.data.moveToNextCombination()
-            }) {
-                Text("Click me")
-            }
+        TabView {
+            ViewTabContentView()
+                .tabItem {
+                    Label("View", systemImage: "list.dash")
+                }
+
+            ConfigTabContentView()
+                .tabItem {
+                    Label("Config", systemImage: "list.dash")
+                }
         }
-        .padding()
     }
 }
 
 #Preview {
     ContentView()
+        .environmentObject(RpsDataViewModel())
+        .frame(width: 500, height: 400)
 }

@@ -2,11 +2,12 @@ import SwiftUI
 
 @main
 struct pvorgApp: App {
-    @StateObject private var rpsConfig = RpsDataViewModel()
+    @StateObject private var rpsData = RpsDataViewModel()
 
     var body: some Scene {
         WindowGroup {
-            ContentView().environmentObject(rpsConfig)
+            ContentView()
+                .environmentObject(rpsData)
         }
     }
 }
