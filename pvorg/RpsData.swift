@@ -68,7 +68,7 @@ struct RpsData: Codable {
     }
 }
 
-struct Combination: Codable {
+struct Combination: Codable, Equatable {
     var videoName: String
     var galleryName: String
 
@@ -123,9 +123,29 @@ class RpsDataViewModel: ObservableObject {
         self.data.selectedVideos = Set(self.data.videoNames)
         self.data.selectedGalleries = Set(self.data.galleryNames)
         self.data.selectedTags = Set()
-        self.data.combinations = getCombinations(rpsData: self.data)
+        self.generateCombinations()
+    }
+
+    func generateCombinations() {
+        var combinations: [Combination] = []
+        for video in self.data.selectedVideos {
+            guard let videoGalleries = self.data.videoGalleries[video],
+                  let videoTags = self.data.videoTags[video] else {
+                continue
+            }
+
+            if !self.data.selectedTags.isEmpty && !self.data.selectedTags.isSubset(of: Set(videoTags)) {
+                continue
+            }
+
+            for gallery in videoGalleries {
+                if self.data.selectedGalleries.contains(gallery) {
+                    combinations.append(Combination(videoName: video, galleryName: gallery))
+                }
+            }
+        }
+        self.data.combinations = combinations.shuffled()
         self.data.combinationIndex = 0
-        print("LOADED")
     }
 }
 
@@ -222,25 +242,4 @@ func getGalleryImages(rpsConfig: RpsConfig, galleryNames: [String]) -> [String: 
     }
 
     return galleryImages
-}
-
-func getCombinations(rpsData: RpsData) -> [Combination] {
-    var combinations: [Combination] = []
-    for video in rpsData.selectedVideos {
-        guard let videoGalleries = rpsData.videoGalleries[video],
-              let videoTags = rpsData.videoTags[video] else {
-            continue
-        }
-
-        if !rpsData.selectedTags.isEmpty && !rpsData.selectedTags.isSubset(of: Set(videoTags)) {
-            continue
-        }
-
-        for gallery in videoGalleries {
-            if rpsData.selectedGalleries.contains(gallery) {
-                combinations.append(Combination(videoName: video, galleryName: gallery))
-            }
-        }
-    }
-    return combinations
 }

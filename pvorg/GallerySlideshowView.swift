@@ -35,6 +35,10 @@ struct GallerySlideshowView: View {
             stopSlideshow()
             startSlideshow()
         }
+        .onChange(of: rpsData.data.combinations) {
+            stopSlideshow()
+            startSlideshow()
+        }
     }
 
     private func startSlideshow() {

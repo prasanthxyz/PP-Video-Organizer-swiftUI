@@ -16,6 +16,14 @@ struct pvorgApp: App {
                 }
                 .keyboardShortcut("D", modifiers: [.command, .shift])
             }
+            CommandGroup(after: .appSettings) {
+                Button(action: {
+                    rpsData.generateCombinations()
+                }) {
+                    Text("Generate Combinations")
+                }
+                .keyboardShortcut("R", modifiers: [.command, .shift])
+            }
         }
     }
 
