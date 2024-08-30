@@ -19,6 +19,9 @@ struct RpsData: Codable {
     var combinations: [Combination]
     var combinationIndex: Int
 
+    var isTgpShown: Bool
+    var isVideoPlaying: Bool
+
     init(rpsConfig: RpsConfig) {
         self.rpsConfig = rpsConfig
         self.videoNames = []
@@ -35,6 +38,9 @@ struct RpsData: Codable {
 
         self.combinations = []
         self.combinationIndex = 0
+
+        self.isTgpShown = true
+        self.isVideoPlaying = false
     }
 
     mutating func moveToNextCombination() {
@@ -205,7 +211,7 @@ func getGalleryImages(rpsConfig: RpsConfig, galleryNames: [String]) -> [String: 
             let files = try FileManager.default.contentsOfDirectory(at: galleryPath, includingPropertiesForKeys: nil)
             for imgPath in files {
                 if imgPath.isFileURL && imageExts.contains(imgPath.pathExtension.lowercased()) && imgPath.lastPathComponent.first != "." {
-                    imgList.append(imgPath.absoluteString)
+                    imgList.append(imgPath.path)
                 }
             }
         } catch {
