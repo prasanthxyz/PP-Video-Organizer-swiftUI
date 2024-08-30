@@ -51,6 +51,14 @@ struct VideoView: View {
         .onDisappear() {
             unloadVideo()
         }
+        .onChange(of: rpsData.data.combinationIndex) {
+            unloadVideo()
+            loadVideo()
+        }
+        .onChange(of: rpsData.data.combinations) {
+            unloadVideo()
+            loadVideo()
+        }
     }
 
     private func loadVideo() {
