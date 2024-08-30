@@ -48,12 +48,12 @@ struct VideoView: View {
             } else if let player = player {
                 VideoPlayerView(player: player)
                     .onChange(of: rpsData.data.isVideoPlaying) { newValue in
-                                            if newValue {
-                                                player.play()
-                                            } else {
-                                                player.pause()
-                                            }
-                                        }
+                        if newValue {
+                            player.play()
+                        } else {
+                            player.pause()
+                        }
+                    }
 
                 HStack {
                     Button(action: {
@@ -64,17 +64,17 @@ struct VideoView: View {
                     }
                     .keyboardShortcut(.space, modifiers: [])
                     Slider(value: Binding(
-                                        get: {
-                                            currentTime
-                                        },
-                                        set: { newValue in
-                                            currentTime = newValue
-                                            let time = CMTimeMakeWithSeconds(newValue, preferredTimescale: player.currentTime().timescale)
-                                            player.seek(to: time)
-                                        }
-                                    ), in: 0...duration)
+                        get: {
+                            currentTime
+                        },
+                        set: { newValue in
+                            currentTime = newValue
+                            let time = CMTimeMakeWithSeconds(newValue, preferredTimescale: player.currentTime().timescale)
+                            player.seek(to: time)
+                        }
+                    ), in: 0...duration)
 
-                                    Text("\(formattedTime(currentTime)) / \(formattedTime(duration))")
+                    Text("\(formattedTime(currentTime)) / \(formattedTime(duration))")
                 }
 
                 HStack {

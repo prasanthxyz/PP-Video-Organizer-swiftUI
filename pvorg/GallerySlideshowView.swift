@@ -20,6 +20,7 @@ struct GallerySlideshowView: View {
                 Image(nsImage: nsImage)
                     .resizable()
                     .aspectRatio(contentMode: .fit)
+                Spacer()
             } else {
                 Text("Image not found")
             }
