@@ -45,16 +45,14 @@ struct RpsData: Codable {
 
     mutating func moveToNextCombination() {
         if (self.combinations.isEmpty) {
-            print("No combinations found.")
-            exit(2)
+            return
         }
         self.combinationIndex = (self.combinationIndex + 1) % self.combinations.count
     }
 
     mutating func moveToPrevCombination() {
         if (self.combinations.isEmpty) {
-            print("No combinations found.")
-            exit(2)
+            return
         }
         self.combinationIndex = (self.combinationIndex - 1 + self.combinations.count) % self.combinations.count
     }

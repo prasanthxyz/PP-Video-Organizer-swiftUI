@@ -4,10 +4,12 @@ struct VideoTgpView: View {
     @EnvironmentObject var rpsData: RpsDataViewModel
 
     var body: some View {
-        if (rpsData.data.isTgpShown) {
-            TgpView()
-        } else {
-            VideoView()
+        if !rpsData.data.combinations.isEmpty {
+            if (rpsData.data.isTgpShown) {
+                TgpView()
+            } else {
+                VideoView()
+            }
         }
     }
 }

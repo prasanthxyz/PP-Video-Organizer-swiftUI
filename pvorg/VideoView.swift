@@ -8,60 +8,65 @@ struct VideoView: View {
     @State private var isLoading = true
 
     var body: some View {
-        VStack {
-            if isLoading {
-                Text("Loading...")
-            } else if let player = player {
-                VideoPlayer(player: player)
-                    .onChange(of: rpsData.data.isVideoPlaying) {
-                        if rpsData.data.isVideoPlaying {
-                            player.play()
-                        } else {
-                            player.pause()
+        if !rpsData.data.combinations.isEmpty {
+            VStack {
+                if isLoading {
+                    Text("Loading...")
+                } else if let player = player {
+                    VideoPlayer(player: player)
+                        .onChange(of: rpsData.data.isVideoPlaying) {
+                            if rpsData.data.isVideoPlaying {
+                                player.play()
+                            } else {
+                                player.pause()
+                            }
                         }
-                    }
-                HStack {
-                    Button(action: {
-                        rpsData.data.isVideoPlaying.toggle()
-                    }) {
-                        Image(systemName: "play.fill")
-                    }
-                    .keyboardShortcut(.space, modifiers: [])
+                    HStack {
+                        Button(action: {
+                            rpsData.data.isVideoPlaying.toggle()
+                        }) {
+                            Image(systemName: "play.fill")
+                        }
+                        .keyboardShortcut(.space, modifiers: [])
 
-                    Button(action: {seek(to:0.0)}) {Text("0")}.keyboardShortcut("0", modifiers: [])
-                    Button(action: {seek(to:0.1)}) {Text("1")}.keyboardShortcut("1", modifiers: [])
-                    Button(action: {seek(to:0.2)}) {Text("2")}.keyboardShortcut("2", modifiers: [])
-                    Button(action: {seek(to:0.3)}) {Text("3")}.keyboardShortcut("3", modifiers: [])
-                    Button(action: {seek(to:0.4)}) {Text("4")}.keyboardShortcut("4", modifiers: [])
-                    Button(action: {seek(to:0.5)}) {Text("5")}.keyboardShortcut("5", modifiers: [])
-                    Button(action: {seek(to:0.6)}) {Text("6")}.keyboardShortcut("6", modifiers: [])
-                    Button(action: {seek(to:0.7)}) {Text("7")}.keyboardShortcut("7", modifiers: [])
-                    Button(action: {seek(to:0.8)}) {Text("8")}.keyboardShortcut("8", modifiers: [])
-                    Button(action: {seek(to:0.9)}) {Text("9")}.keyboardShortcut("9", modifiers: [])
+                        Button(action: {seek(to:0.0)}) {Text("0")}.keyboardShortcut("0", modifiers: [])
+                        Button(action: {seek(to:0.1)}) {Text("1")}.keyboardShortcut("1", modifiers: [])
+                        Button(action: {seek(to:0.2)}) {Text("2")}.keyboardShortcut("2", modifiers: [])
+                        Button(action: {seek(to:0.3)}) {Text("3")}.keyboardShortcut("3", modifiers: [])
+                        Button(action: {seek(to:0.4)}) {Text("4")}.keyboardShortcut("4", modifiers: [])
+                        Button(action: {seek(to:0.5)}) {Text("5")}.keyboardShortcut("5", modifiers: [])
+                        Button(action: {seek(to:0.6)}) {Text("6")}.keyboardShortcut("6", modifiers: [])
+                        Button(action: {seek(to:0.7)}) {Text("7")}.keyboardShortcut("7", modifiers: [])
+                        Button(action: {seek(to:0.8)}) {Text("8")}.keyboardShortcut("8", modifiers: [])
+                        Button(action: {seek(to:0.9)}) {Text("9")}.keyboardShortcut("9", modifiers: [])
+                    }
+                    .opacity(0)
+                    .frame(height: 0.5)
+                } else {
+                    Text("Failed")
                 }
-                .opacity(0)
-                .frame(height: 0.5)
-            } else {
-                Text("Failed")
             }
-        }
-        .onAppear() {
-            loadVideo()
-        }
-        .onDisappear() {
-            unloadVideo()
-        }
-        .onChange(of: rpsData.data.combinationIndex) {
-            unloadVideo()
-            loadVideo()
-        }
-        .onChange(of: rpsData.data.combinations) {
-            unloadVideo()
-            loadVideo()
+            .onAppear() {
+                loadVideo()
+            }
+            .onDisappear() {
+                unloadVideo()
+            }
+            .onChange(of: rpsData.data.combinationIndex) {
+                unloadVideo()
+                loadVideo()
+            }
+            .onChange(of: rpsData.data.combinations) {
+                unloadVideo()
+                loadVideo()
+            }
         }
     }
 
     private func loadVideo() {
+        if rpsData.data.combinations.isEmpty {
+            return
+        }
         let vidPath = rpsData.data.rpsConfig.vidPath
         let videoName = rpsData.data.getCurrentCombination().videoName
         let videoURL = URL(fileURLWithPath: vidPath).appendingPathComponent(videoName)

@@ -14,34 +14,40 @@ struct GallerySlideshowView: View {
     }
 
     var body: some View {
-        VStack {
-            let image = images.isEmpty ? "" : images[currentImageIndex]
-            if let nsImage = NSImage(contentsOfFile: image) {
-                Image(nsImage: nsImage)
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                Spacer()
-            } else {
-                Text("Image not found")
+        if !rpsData.data.combinations.isEmpty {
+            VStack {
+                let image = images.isEmpty ? "" : images[currentImageIndex]
+                if let nsImage = NSImage(contentsOfFile: image) {
+                    Image(nsImage: nsImage)
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                    Spacer()
+                } else {
+                    Text("Image not found")
+                }
             }
-        }
-        .onAppear() {
-            startSlideshow()
-        }
-        .onDisappear() {
-            stopSlideshow()
-        }
-        .onChange(of: rpsData.data.combinationIndex) {
-            stopSlideshow()
-            startSlideshow()
-        }
-        .onChange(of: rpsData.data.combinations) {
-            stopSlideshow()
-            startSlideshow()
+            .onAppear() {
+                startSlideshow()
+            }
+            .onDisappear() {
+                stopSlideshow()
+            }
+            .onChange(of: rpsData.data.combinationIndex) {
+                stopSlideshow()
+                startSlideshow()
+            }
+            .onChange(of: rpsData.data.combinations) {
+                stopSlideshow()
+                startSlideshow()
+            }
         }
     }
 
     private func startSlideshow() {
+        if rpsData.data.combinations.isEmpty {
+            return
+        }
+        self.currentImageIndex = 0
         let galleryName = rpsData.data.getCurrentCombination().galleryName
         images = rpsData.data.galleryImages[galleryName] ?? []
         timer = Timer.scheduledTimer(withTimeInterval: 2.0, repeats: true) { _ in

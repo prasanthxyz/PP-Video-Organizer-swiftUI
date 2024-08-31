@@ -4,18 +4,20 @@ struct TgpView: View {
     @EnvironmentObject var rpsData: RpsDataViewModel
 
     var body: some View {
-        let vidPath = rpsData.data.rpsConfig.vidPath
-        let videoName = rpsData.data.getCurrentCombination().videoName
-        let tgpPath = URL(fileURLWithPath: vidPath).appendingPathComponent("img").appendingPathComponent(videoName + ".jpg")
-        if let nsImage = NSImage(contentsOfFile: tgpPath.path) {
-            VStack {
-                Image(nsImage: nsImage)
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                Spacer()
+        if !rpsData.data.combinations.isEmpty {
+            let vidPath = rpsData.data.rpsConfig.vidPath
+            let videoName = rpsData.data.getCurrentCombination().videoName
+            let tgpPath = URL(fileURLWithPath: vidPath).appendingPathComponent("img").appendingPathComponent(videoName + ".jpg")
+            if let nsImage = NSImage(contentsOfFile: tgpPath.path) {
+                VStack {
+                    Image(nsImage: nsImage)
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                    Spacer()
+                }
+            } else {
+                Text("Image not found: " + tgpPath.path)
             }
-        } else {
-            Text("Image not found: " + tgpPath.path)
         }
     }
 }
