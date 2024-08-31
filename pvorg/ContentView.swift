@@ -3,11 +3,12 @@ import SwiftUI
 struct ContentView: View {
     @EnvironmentObject var rpsData: RpsDataViewModel
     @State private var isSettingup = true
+    @State private var settingUpMessage = ""
 
     var body: some View {
         if isSettingup {
             VStack {
-                Text("Processing data directories...")
+                Text(settingUpMessage)
                     .font(.title)
                     .padding(20)
                 ProgressView()
@@ -35,6 +36,7 @@ struct ContentView: View {
     func setupDataDirs() {
         isSettingup = true
         DispatchQueue.global(qos: .background).async {
+            self.settingUpMessage = "Generating TGPs..."
             generateTgps()
 
             DispatchQueue.main.async {
@@ -60,7 +62,9 @@ struct ContentView: View {
             }
         }
 
-        for videoName in rpsData.data.videoNames {
+        for curIndex in 0..<rpsData.data.videoNames.count {
+            self.settingUpMessage = "Generating TGPs... \(curIndex + 1)/\(rpsData.data.videoNames.count)"
+            let videoName = rpsData.data.videoNames[curIndex]
             let videoPath = URL(fileURLWithPath: vidPath).appendingPathComponent(videoName).path
             let imgName = (videoPath as NSString).lastPathComponent + ".jpg"
             let outputPath = (imgPath as NSString).appendingPathComponent(imgName)
