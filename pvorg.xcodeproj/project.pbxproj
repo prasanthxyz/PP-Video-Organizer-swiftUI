@@ -13,6 +13,7 @@
 		AAC239FD2C8053D30098CA72 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AAC239FC2C8053D30098CA72 /* Assets.xcassets */; };
 		AAC23A002C8053D30098CA72 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AAC239FF2C8053D30098CA72 /* Preview Assets.xcassets */; };
 		AAC39E062C833FAE00FE98A8 /* gen_tgp.sh in Resources */ = {isa = PBXBuildFile; fileRef = AAC39E052C8321D400FE98A8 /* gen_tgp.sh */; };
+		AAC39E092C836F5A00FE98A8 /* AVKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AAC39E082C836F5A00FE98A8 /* AVKit.framework */; };
 		AAF1E0A12C80F58F00E60D65 /* ViewTabContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF1E0A02C80F58F00E60D65 /* ViewTabContentView.swift */; };
 		AAF1E0A32C80F75500E60D65 /* ConfigTabContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF1E0A22C80F75500E60D65 /* ConfigTabContentView.swift */; };
 		AAF1E0A52C81A44500E60D65 /* VideoTgpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF1E0A42C81A44500E60D65 /* VideoTgpView.swift */; };
@@ -30,6 +31,7 @@
 		AAC239FF2C8053D30098CA72 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		AAC23A012C8053D30098CA72 /* pvorg.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = pvorg.entitlements; sourceTree = "<group>"; };
 		AAC39E052C8321D400FE98A8 /* gen_tgp.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = gen_tgp.sh; sourceTree = "<group>"; };
+		AAC39E082C836F5A00FE98A8 /* AVKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVKit.framework; path = System/Library/Frameworks/AVKit.framework; sourceTree = SDKROOT; };
 		AAF1E0A02C80F58F00E60D65 /* ViewTabContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewTabContentView.swift; sourceTree = "<group>"; };
 		AAF1E0A22C80F75500E60D65 /* ConfigTabContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigTabContentView.swift; sourceTree = "<group>"; };
 		AAF1E0A42C81A44500E60D65 /* VideoTgpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoTgpView.swift; sourceTree = "<group>"; };
@@ -43,6 +45,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AAC39E092C836F5A00FE98A8 /* AVKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -54,6 +57,7 @@
 			children = (
 				AAC239F62C8053D20098CA72 /* Products */,
 				AAC239F72C8053D20098CA72 /* pvorg */,
+				AAC39E072C836F5900FE98A8 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -91,6 +95,14 @@
 				AAC239FF2C8053D30098CA72 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		AAC39E072C836F5900FE98A8 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				AAC39E082C836F5A00FE98A8 /* AVKit.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

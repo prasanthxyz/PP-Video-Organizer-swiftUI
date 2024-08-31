@@ -48,6 +48,9 @@ struct VideoView: View {
             }
             .onAppear() {
                 loadVideo()
+                if rpsData.data.isVideoPlaying {
+                    player?.play()
+                }
             }
             .onDisappear() {
                 unloadVideo()
@@ -71,7 +74,6 @@ struct VideoView: View {
         let videoName = rpsData.data.getCurrentCombination().videoName
         let videoURL = URL(fileURLWithPath: vidPath).appendingPathComponent(videoName)
         self.player = AVPlayer(url: videoURL)
-        player?.play()
         isLoading = false
     }
 
