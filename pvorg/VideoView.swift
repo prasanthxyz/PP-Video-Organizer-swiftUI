@@ -39,6 +39,8 @@ struct VideoView: View {
                         Button(action: {seek(to:0.7)}) {Text("7")}.keyboardShortcut("7", modifiers: [])
                         Button(action: {seek(to:0.8)}) {Text("8")}.keyboardShortcut("8", modifiers: [])
                         Button(action: {seek(to:0.9)}) {Text("9")}.keyboardShortcut("9", modifiers: [])
+                        Button(action: {seekLeft()}) {Text("left")}.keyboardShortcut(.leftArrow, modifiers: [])
+                        Button(action: {seekRight()}) {Text("right")}.keyboardShortcut(.rightArrow, modifiers: [])
                     }
                     .opacity(0)
                     .frame(height: 0.5)
@@ -91,6 +93,20 @@ struct VideoView: View {
         guard let duration = player.currentItem?.duration else { return }
         let targetTime = CMTimeMultiplyByFloat64(duration, multiplier: percentage)
         player.seek(to: targetTime)
+    }
+
+    private func seekLeft() {
+        guard let player = self.player else {return}
+        let currentTime = player.currentTime()
+        let newTime = CMTimeSubtract(currentTime, CMTime(seconds: 10, preferredTimescale: 1))
+        player.seek(to: newTime)
+    }
+
+    private func seekRight() {
+        guard let player = self.player else {return}
+        let currentTime = player.currentTime()
+        let newTime = CMTimeAdd(currentTime, CMTime(seconds: 10, preferredTimescale: 1))
+        player.seek(to: newTime)
     }
 }
 
