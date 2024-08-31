@@ -112,6 +112,13 @@ class RpsDataViewModel: ObservableObject {
         let fileURL = URL(fileURLWithPath: NSHomeDirectory()).appendingPathComponent("pvorg.json")
         let rpsConfig: RpsConfig = load(fileURL)
         self.data = RpsData(rpsConfig: rpsConfig)
+        self.reloadData(rpsConfigIn: rpsConfig)
+    }
+
+    func reloadData(rpsConfigIn: RpsConfig? = nil) {
+        let fileURL = URL(fileURLWithPath: NSHomeDirectory()).appendingPathComponent("pvorg.json")
+        let rpsConfig = rpsConfigIn != nil ? rpsConfigIn! : load(fileURL)
+        self.data.rpsConfig = rpsConfig
         self.data.videoNames = getVideoNames(rpsConfig: rpsConfig)
         self.data.galleryNames = getGalleryNames(rpsConfig: rpsConfig)
         self.data.tagNames = rpsConfig.tags

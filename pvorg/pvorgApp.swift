@@ -20,7 +20,15 @@ struct pvorgApp: App {
                 Button(action: {
                     rpsData.generateCombinations()
                 }) {
-                    Text("Generate Combinations")
+                    Text("Shuffle Combinations")
+                }
+                .keyboardShortcut("S", modifiers: [.command, .shift])
+            }
+            CommandGroup(after: .appSettings) {
+                Button(action: {
+                    rpsData.reloadData()
+                }) {
+                    Text("Refresh data")
                 }
                 .keyboardShortcut("R", modifiers: [.command, .shift])
             }
