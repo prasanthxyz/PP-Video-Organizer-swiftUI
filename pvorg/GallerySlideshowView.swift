@@ -47,6 +47,8 @@ struct GallerySlideshowView: View {
         if rpsData.data.combinations.isEmpty {
             return
         }
+        timer?.invalidate()
+        timer = nil
         self.currentImageIndex = 0
         let galleryName = rpsData.data.getCurrentCombination().galleryName
         images = rpsData.data.galleryImages[galleryName] ?? []
