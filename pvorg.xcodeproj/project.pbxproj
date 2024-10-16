@@ -14,6 +14,9 @@
 		AAC23A002C8053D30098CA72 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AAC239FF2C8053D30098CA72 /* Preview Assets.xcassets */; };
 		AAC39E062C833FAE00FE98A8 /* gen_tgp.sh in Resources */ = {isa = PBXBuildFile; fileRef = AAC39E052C8321D400FE98A8 /* gen_tgp.sh */; };
 		AAC39E092C836F5A00FE98A8 /* AVKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AAC39E082C836F5A00FE98A8 /* AVKit.framework */; };
+		AAF10A822CBFABB900799442 /* GlobalState.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF10A812CBFABB600799442 /* GlobalState.swift */; };
+		AAF10A842CBFADF000799442 /* GlobalStateUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF10A832CBFADED00799442 /* GlobalStateUtils.swift */; };
+		AAF10A872CBFBEC700799442 /* RpsConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF10A862CBFBEC300799442 /* RpsConfig.swift */; };
 		AAF1E0A12C80F58F00E60D65 /* ViewTabContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF1E0A02C80F58F00E60D65 /* ViewTabContentView.swift */; };
 		AAF1E0A32C80F75500E60D65 /* ConfigTabContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF1E0A22C80F75500E60D65 /* ConfigTabContentView.swift */; };
 		AAF1E0A52C81A44500E60D65 /* VideoTgpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF1E0A42C81A44500E60D65 /* VideoTgpView.swift */; };
@@ -32,6 +35,9 @@
 		AAC23A012C8053D30098CA72 /* pvorg.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = pvorg.entitlements; sourceTree = "<group>"; };
 		AAC39E052C8321D400FE98A8 /* gen_tgp.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = gen_tgp.sh; sourceTree = "<group>"; };
 		AAC39E082C836F5A00FE98A8 /* AVKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVKit.framework; path = System/Library/Frameworks/AVKit.framework; sourceTree = SDKROOT; };
+		AAF10A812CBFABB600799442 /* GlobalState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalState.swift; sourceTree = "<group>"; };
+		AAF10A832CBFADED00799442 /* GlobalStateUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalStateUtils.swift; sourceTree = "<group>"; };
+		AAF10A862CBFBEC300799442 /* RpsConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RpsConfig.swift; sourceTree = "<group>"; };
 		AAF1E0A02C80F58F00E60D65 /* ViewTabContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewTabContentView.swift; sourceTree = "<group>"; };
 		AAF1E0A22C80F75500E60D65 /* ConfigTabContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigTabContentView.swift; sourceTree = "<group>"; };
 		AAF1E0A42C81A44500E60D65 /* VideoTgpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoTgpView.swift; sourceTree = "<group>"; };
@@ -72,6 +78,7 @@
 		AAC239F72C8053D20098CA72 /* pvorg */ = {
 			isa = PBXGroup;
 			children = (
+				AAF10A852CBFADF900799442 /* GlobalState */,
 				AAC239FC2C8053D30098CA72 /* Assets.xcassets */,
 				AAF1E0A22C80F75500E60D65 /* ConfigTabContentView.swift */,
 				AAC239FA2C8053D20098CA72 /* ContentView.swift */,
@@ -103,6 +110,16 @@
 				AAC39E082C836F5A00FE98A8 /* AVKit.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		AAF10A852CBFADF900799442 /* GlobalState */ = {
+			isa = PBXGroup;
+			children = (
+				AAF10A862CBFBEC300799442 /* RpsConfig.swift */,
+				AAF10A832CBFADED00799442 /* GlobalStateUtils.swift */,
+				AAF10A812CBFABB600799442 /* GlobalState.swift */,
+			);
+			path = GlobalState;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -181,12 +198,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				AAC239FB2C8053D20098CA72 /* ContentView.swift in Sources */,
+				AAF10A872CBFBEC700799442 /* RpsConfig.swift in Sources */,
 				AA5A5C1D2C8079390022774C /* RpsData.swift in Sources */,
 				AAF1E0A32C80F75500E60D65 /* ConfigTabContentView.swift in Sources */,
 				AAF1E0B52C821C2000E60D65 /* VideoView.swift in Sources */,
 				AAF1E0AB2C81AC1000E60D65 /* GallerySlideshowView.swift in Sources */,
 				AAC239F92C8053D20098CA72 /* pvorgApp.swift in Sources */,
+				AAF10A822CBFABB900799442 /* GlobalState.swift in Sources */,
 				AAF1E0A52C81A44500E60D65 /* VideoTgpView.swift in Sources */,
+				AAF10A842CBFADF000799442 /* GlobalStateUtils.swift in Sources */,
 				AAF1E0A12C80F58F00E60D65 /* ViewTabContentView.swift in Sources */,
 				AAF1E0A92C81AAA400E60D65 /* TgpView.swift in Sources */,
 			);

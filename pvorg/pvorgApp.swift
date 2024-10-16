@@ -18,7 +18,7 @@ struct pvorgApp: App {
             }
             CommandGroup(after: .appSettings) {
                 Button(action: {
-                    rpsData.generateCombinations()
+                    rpsData.refreshCombinations()
                 }) {
                     Text("Shuffle Combinations")
                 }

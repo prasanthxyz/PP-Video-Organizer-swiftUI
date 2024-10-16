@@ -51,7 +51,7 @@ struct ContentView: View {
             return
         }
 
-        let vidPath = rpsData.data.rpsConfig.vidPath
+        let vidPath = rpsData.data.rpsConfig.vidsPath
         let imgPath = URL(fileURLWithPath: vidPath).appendingPathComponent("img").path
         if !FileManager.default.fileExists(atPath: imgPath) {
             do {
@@ -62,9 +62,9 @@ struct ContentView: View {
             }
         }
 
-        for curIndex in 0..<rpsData.data.videoNames.count {
-            self.settingUpMessage = "Generating TGPs... \(curIndex + 1)/\(rpsData.data.videoNames.count)"
-            let videoName = rpsData.data.videoNames[curIndex]
+        for curIndex in 0..<rpsData.data.videos.count {
+            self.settingUpMessage = "Generating TGPs... \(curIndex + 1)/\(rpsData.data.videos.count)"
+            let videoName = rpsData.data.videos[curIndex].name
             let videoPath = URL(fileURLWithPath: vidPath).appendingPathComponent(videoName).path
             let imgName = (videoPath as NSString).lastPathComponent + ".jpg"
             let outputPath = (imgPath as NSString).appendingPathComponent(imgName)

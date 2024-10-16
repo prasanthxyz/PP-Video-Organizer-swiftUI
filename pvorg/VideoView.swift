@@ -72,8 +72,8 @@ struct VideoView: View {
         if rpsData.data.combinations.isEmpty {
             return
         }
-        let vidPath = rpsData.data.rpsConfig.vidPath
-        let videoName = rpsData.data.getCurrentCombination().videoName
+        let vidPath = rpsData.data.rpsConfig.vidsPath
+        let videoName = rpsData.data.getCurrentCombination().video
         let videoURL = URL(fileURLWithPath: vidPath).appendingPathComponent(videoName)
         self.player = AVPlayer(url: videoURL)
         isLoading = false

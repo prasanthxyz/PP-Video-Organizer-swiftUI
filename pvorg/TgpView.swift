@@ -5,8 +5,8 @@ struct TgpView: View {
 
     var body: some View {
         if !rpsData.data.combinations.isEmpty {
-            let vidPath = rpsData.data.rpsConfig.vidPath
-            let videoName = rpsData.data.getCurrentCombination().videoName
+            let vidPath = rpsData.data.rpsConfig.vidsPath
+            let videoName = rpsData.data.getCurrentCombination().video
             let tgpPath = URL(fileURLWithPath: vidPath).appendingPathComponent("img").appendingPathComponent(videoName + ".jpg")
             if let nsImage = NSImage(contentsOfFile: tgpPath.path) {
                 VStack {

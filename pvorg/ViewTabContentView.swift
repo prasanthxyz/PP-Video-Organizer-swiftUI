@@ -14,7 +14,7 @@ struct ViewTabContentView: View {
                 VStack {
                     HStack {
                         HStack {
-                            Text(rpsData.data.getCurrentCombination().videoName)
+                            Text(rpsData.data.getCurrentCombination().video)
                             Spacer()
                             Button(action: {
                                 if (rpsData.data.isTgpShown) {
@@ -52,7 +52,7 @@ struct ViewTabContentView: View {
                             }
                             .keyboardShortcut("n", modifiers: [])
                             Spacer()
-                            Text(rpsData.data.getCurrentCombination().galleryName)
+                            Text(rpsData.data.getCurrentCombination().gallery)
                         }
                         .frame(width: geometry.size.width * 0.25)
                     }
