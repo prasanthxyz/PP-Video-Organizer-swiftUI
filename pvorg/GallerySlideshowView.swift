@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct GallerySlideshowView: View {
-    @EnvironmentObject var rpsData: RpsDataViewModel
+    @EnvironmentObject var appState: AppState
 
     @State private var currentImageIndex: Int = 0
     @State private var timer: Timer?
@@ -14,7 +14,7 @@ struct GallerySlideshowView: View {
     }
 
     var body: some View {
-        if !rpsData.data.combinations.isEmpty {
+        if !appState.combinations.isEmpty {
             VStack {
                 let image = images.isEmpty ? "" : images[currentImageIndex]
                 if let nsImage = NSImage(contentsOfFile: image) {
@@ -26,17 +26,17 @@ struct GallerySlideshowView: View {
                     Text("Image not found")
                 }
             }
-            .onAppear() {
+            .onAppear {
                 startSlideshow()
             }
-            .onDisappear() {
+            .onDisappear {
                 stopSlideshow()
             }
-            .onChange(of: rpsData.data.combinationIndex) {
+            .onChange(of: appState.combinationIndex) {
                 stopSlideshow()
                 startSlideshow()
             }
-            .onChange(of: rpsData.data.combinations) {
+            .onChange(of: appState.combinations) {
                 stopSlideshow()
                 startSlideshow()
             }
@@ -44,14 +44,13 @@ struct GallerySlideshowView: View {
     }
 
     private func startSlideshow() {
-        if rpsData.data.combinations.isEmpty {
+        if appState.combinations.isEmpty {
             return
         }
         timer?.invalidate()
         timer = nil
         self.currentImageIndex = 0
-        let galleryName = rpsData.data.getCurrentCombination().gallery
-        images = rpsData.data.galleryObjectsMap[galleryName]?.imgPaths ?? []
+        images = appState.getCurrentCombination()?.gallery.imageFiles ?? []
         timer = Timer.scheduledTimer(withTimeInterval: 2.0, repeats: true) { _ in
             withAnimation {
                 currentImageIndex = (currentImageIndex + 1) % images.count
@@ -67,6 +66,6 @@ struct GallerySlideshowView: View {
 
 #Preview {
     GallerySlideshowView()
-        .environmentObject(RpsDataViewModel())
+        .environmentObject(AppState())
         .frame(width: 500, height: 400)
 }

@@ -2,12 +2,12 @@ import SwiftUI
 
 @main
 struct pvorgApp: App {
-    @StateObject private var rpsData = RpsDataViewModel()
+    @StateObject private var appState = AppState()
 
     var body: some Scene {
         WindowGroup {
             ContentView()
-                .environmentObject(rpsData)
+                .environmentObject(appState)
         }
         .commands {
             CommandGroup(replacing: .appSettings) {
@@ -18,7 +18,7 @@ struct pvorgApp: App {
             }
             CommandGroup(after: .appSettings) {
                 Button(action: {
-                    rpsData.refreshCombinations()
+                    appState.generateCombinations()
                 }) {
                     Text("Shuffle Combinations")
                 }
@@ -26,7 +26,7 @@ struct pvorgApp: App {
             }
             CommandGroup(after: .appSettings) {
                 Button(action: {
-                    rpsData.reloadData()
+                    appState.loadConfig()
                 }) {
                     Text("Refresh data")
                 }

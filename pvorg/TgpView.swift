@@ -1,13 +1,15 @@
 import SwiftUI
 
 struct TgpView: View {
-    @EnvironmentObject var rpsData: RpsDataViewModel
+    @EnvironmentObject var appState: AppState
 
     var body: some View {
-        if !rpsData.data.combinations.isEmpty {
-            let vidPath = rpsData.data.rpsConfig.vidsPath
-            let videoName = rpsData.data.getCurrentCombination().video
-            let tgpPath = URL(fileURLWithPath: vidPath).appendingPathComponent("img").appendingPathComponent(videoName + ".jpg")
+        if !appState.combinations.isEmpty {
+            let videosPath = appState.appConfig?.videosPath ?? ""
+            let videoName = appState.getCurrentCombination()?.video.filename ?? ""
+            let tgpPath = URL(fileURLWithPath: videosPath)
+                .appendingPathComponent("img")
+                .appendingPathComponent(videoName + ".jpg")
             if let nsImage = NSImage(contentsOfFile: tgpPath.path) {
                 VStack {
                     Image(nsImage: nsImage)
@@ -24,6 +26,6 @@ struct TgpView: View {
 
 #Preview {
     TgpView()
-        .environmentObject(RpsDataViewModel())
+        .environmentObject(AppState())
         .frame(width: 500, height: 400)
 }

@@ -1,157 +1,156 @@
 import SwiftUI
+import WrappingStack
 
 struct ConfigTabContentView: View {
-    @EnvironmentObject var rpsData: RpsDataViewModel
+    @EnvironmentObject var appState: AppState
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 0) {
-            HStack{
-                Text("Galleries").font(.title)
-                Spacer()
-            }
-            FlowLayout(items: $rpsData.data.filters.galleries) { item in
-                TagView(item: item)
-                    .onTapGesture {
-                        toggleGallerySelection(for: item)
-                    }
-            }
+        VStack(alignment: .leading, spacing: 16) {
+            Text("Select Studios")
+                .font(.headline)
 
-            HStack{
-                Text("Tags").font(.title)
-                Spacer()
-            }
-            FlowLayout(items: $rpsData.data.filters.tags) { item in
-                TagView(item: item)
-                    .onTapGesture {
-                        toggleTagSelection(for: item)
-                    }
-            }
-
-            HStack{
-                Text("Studio").font(.title)
-                Spacer()
-            }
-            FlowLayout(items: $rpsData.data.filters.studios) { item in
-                TagView(item: item)
-                    .onTapGesture {
-                        toggleStudioSelection(for: item)
-                    }
-            }
-
-            HStack{
-                Text("Cast").font(.title)
-                Spacer()
-            }
-            FlowLayout(items: $rpsData.data.filters.cast) { item in
-                TagView(item: item)
-                    .onTapGesture {
-                        toggleCastSelection(for: item)
-                    }
-            }
-
-            HStack{
-                Text("Sample Combinations").font(.title)
-                Spacer()
-            }
-            let combinations = Array(rpsData.data.combinations.prefix(10))
-            if combinations.count > 0 {
-                List(combinations, id: \.self) { combination in
-                    Text("\(combination.video) - \(combination.gallery)")
-                }
-            } else {
-                HStack {
-                    Text("No combinations found").font(.title)
-                    Spacer()
+            WrappingHStack(id: \.self, alignment: .leading, horizontalSpacing: 10, verticalSpacing: 5) {
+                let studios = appState.videos.map({ $0.studio }).unique().sorted()
+                ForEach(studios, id: \.self) { studio in
+                    TagView(
+                        label: studio,
+                        isSelected: appState.selectedStudios.contains(studio),
+                        onTap: {
+                            if appState.selectedStudios.contains(studio) {
+                                appState.selectedStudios.remove(studio)
+                            } else {
+                                appState.selectedStudios.insert(studio)
+                            }
+                            appState.generateCombinations()
+                        }
+                    )
                 }
             }
+
+            Text("Select Galleries")
+                .font(.headline)
+
+            WrappingHStack(id: \.self, alignment: .leading, horizontalSpacing: 10, verticalSpacing: 5) {
+                let galleries = appState.galleries.map({ $0.name }).unique().sorted()
+                ForEach(galleries, id: \.self) { gallery in
+                    TagView(
+                        label: gallery,
+                        isSelected: appState.selectedGalleries.contains(gallery),
+                        onTap: {
+                            if appState.selectedGalleries.contains(gallery) {
+                                appState.selectedGalleries.remove(gallery)
+                            } else {
+                                appState.selectedGalleries.insert(gallery)
+                            }
+                            appState.generateCombinations()
+                        }
+                    )
+                }
+            }
+
+            Text("Select Tags")
+                .font(.headline)
+
+            WrappingHStack(id: \.self, alignment: .leading, horizontalSpacing: 10, verticalSpacing: 5) {
+                let tags = appState.appConfig?.tags.unique().sorted() ?? []
+                ForEach(tags, id: \.self) { tag in
+                    TagView(
+                        label: tag,
+                        isSelected: appState.selectedTags.contains(tag),
+                        onTap: {
+                            if appState.selectedTags.contains(tag) {
+                                appState.selectedTags.remove(tag)
+                            } else {
+                                appState.selectedTags.insert(tag)
+                            }
+                            appState.generateCombinations()
+                        }
+                    )
+                }
+            }
+
+            Text("Select Cast")
+                .font(.headline)
+
+            WrappingHStack(id: \.self, alignment: .leading, horizontalSpacing: 10, verticalSpacing: 5) {
+                let actors = appState.videos.flatMap { $0.actors }.unique().sorted()
+                ForEach(actors, id: \.self) { actor in
+                    TagView(
+                        label: actor,
+                        isSelected: appState.selectedCast.contains(actor),
+                        onTap: {
+                            if appState.selectedCast.contains(actor) {
+                                appState.selectedCast.remove(actor)
+                            } else {
+                                appState.selectedCast.insert(actor)
+                            }
+                            appState.generateCombinations()
+                        }
+                    )
+                }
+            }
+
+            Divider()
+                .padding(.vertical)
+
+            Text("Sample Combinations")
+                .font(.headline)
+            ScrollView {
+                if appState.combinations.isEmpty {
+                    VStack {
+                        Text("No combinations")
+                        Spacer()
+                    }
+                } else {
+                    LazyVStack {
+                        ForEach(appState.combinations.prefix(10), id: \.self) { combination in
+                            HStack {
+                                Text("Video: \(combination.video.title)")
+                                Spacer()
+                                Text("Gallery: \(combination.gallery.name)")
+                            }
+                            .padding()
+                            .background(Color.gray.opacity(0.1))
+                            .cornerRadius(10)
+                        }
+                    }
+                    .frame(maxWidth: 300, alignment: .leading)
+                }
+            }
+
+            Spacer()
         }
         .padding()
-    }
-
-    func toggleGallerySelection(for item: SelectableItem) {
-        if let index = rpsData.data.filters.galleries.firstIndex(where: { $0.value == item.value }) {
-            rpsData.data.filters.galleries[index].isSelected.toggle()
-            rpsData.refreshCombinations()
-        }
-    }
-
-    func toggleTagSelection(for item: SelectableItem) {
-        if let index = rpsData.data.filters.tags.firstIndex(where: { $0.value == item.value }) {
-            rpsData.data.filters.tags[index].isSelected.toggle()
-            rpsData.refreshCombinations()
-        }
-    }
-
-    func toggleStudioSelection(for item: SelectableItem) {
-        if let index = rpsData.data.filters.studios.firstIndex(where: { $0.value == item.value }) {
-            rpsData.data.filters.studios[index].isSelected.toggle()
-            rpsData.refreshCombinations()
-        }
-    }
-
-    func toggleCastSelection(for item: SelectableItem) {
-        if let index = rpsData.data.filters.cast.firstIndex(where: { $0.value == item.value }) {
-            rpsData.data.filters.cast[index].isSelected.toggle()
-            rpsData.refreshCombinations()
-        }
     }
 }
 
 struct TagView: View {
-    let item: SelectableItem
+    var label: String
+    var isSelected: Bool
+    var onTap: () -> Void
 
     var body: some View {
-        Text(item.value)
-            .padding(.horizontal, 12)
+        Text(label)
             .padding(.vertical, 8)
-            .background(item.isSelected ? Color.blue : Color.gray)
-            .foregroundColor(.white)
+            .padding(.horizontal, 16)
+            .background(isSelected ? Color.blue : Color.gray.opacity(0.3))  // Highlight if selected
+            .foregroundColor(isSelected ? .white : .black)
             .cornerRadius(20)
-    }
-}
-
-
-struct FlowLayout<Content: View>: View {
-    @Binding var items: [SelectableItem]
-    let content: (SelectableItem) -> Content
-
-    var body: some View {
-        GeometryReader { geometry in
-            self.createWrappedView(for: geometry.size.width)
-        }
-    }
-
-    // Create wrapped tags based on available width
-    private func createWrappedView(for totalWidth: CGFloat) -> some View {
-        var width = CGFloat(0)
-        var height = CGFloat(0)
-
-        return ZStack(alignment: .topLeading) {
-            ForEach(items, id: \.value) { item in
-                content(item)
-                    .padding([.horizontal, .vertical], 4)
-                    .alignmentGuide(.leading, computeValue: { dimension in
-                        if (abs(width - dimension.width) > totalWidth) {
-                            width = 0
-                            height -= dimension.height
-                        }
-                        let result = width
-                        if item.value == self.items.last!.value {
-                            width = 0
-                        } else {
-                            width -= dimension.width
-                        }
-                        return result
-                    })
-                    .alignmentGuide(.top, computeValue: { _ in height })
+            .onTapGesture {
+                onTap()
             }
-        }
     }
 }
 
+extension Array where Element: Hashable {
+    func unique() -> [Element] {
+        var set = Set<Element>()
+        return filter { set.insert($0).inserted }
+    }
+}
 
 #Preview {
     ConfigTabContentView()
-        .environmentObject(RpsDataViewModel())
-        .frame(width: 500, height: 400)
+        .environmentObject(AppState())
+        .frame(width: 500, height: 800)
 }

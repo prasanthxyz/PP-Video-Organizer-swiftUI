@@ -1,13 +1,13 @@
 import Foundation
 
-struct RpsConfig: Codable {
-    var vidsPath: String
-    var galsPath: String
+struct AppConfig: Codable {
+    var videosPath: String
+    var galleriesPath: String
     var tags: [String]
-    var videoRelations: [String: VideoRelations]
+    var videoRelations: [String: VideoRelation]
 }
 
-struct VideoRelations: Codable {
+struct VideoRelation: Codable {
     var galleries: [String]
     var tags: [String]
 }
