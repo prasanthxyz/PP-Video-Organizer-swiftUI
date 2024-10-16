@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct ContentView: View {
-    @EnvironmentObject var rpsData: RpsDataViewModel
+    @EnvironmentObject var appState: AppState
     @State private var isSettingup = true
     @State private var settingUpMessage = ""
 
@@ -51,21 +51,27 @@ struct ContentView: View {
             return
         }
 
-        let vidPath = rpsData.data.rpsConfig.vidPath
-        let imgPath = URL(fileURLWithPath: vidPath).appendingPathComponent("img").path
+        guard let appConfig = appState.appConfig else {
+            print("App Config not initialized")
+            return
+        }
+
+        let videosPath = appConfig.videosPath
+        let imgPath = URL(fileURLWithPath: videosPath).appendingPathComponent("img").path
         if !FileManager.default.fileExists(atPath: imgPath) {
             do {
-                try FileManager.default.createDirectory(atPath: imgPath, withIntermediateDirectories: true, attributes: nil)
+                try FileManager.default.createDirectory(
+                    atPath: imgPath, withIntermediateDirectories: true, attributes: nil)
             } catch {
                 print("Unable to create image directory \(imgPath): \(error.localizedDescription)")
                 exit(3)
             }
         }
 
-        for curIndex in 0..<rpsData.data.videoNames.count {
-            self.settingUpMessage = "Generating TGPs... \(curIndex + 1)/\(rpsData.data.videoNames.count)"
-            let videoName = rpsData.data.videoNames[curIndex]
-            let videoPath = URL(fileURLWithPath: vidPath).appendingPathComponent(videoName).path
+        for curIndex in 0..<appState.videos.count {
+            self.settingUpMessage = "Generating TGPs... \(curIndex + 1)/\(appState.videos.count)"
+            let videoName = appState.videos[curIndex].filename
+            let videoPath = URL(fileURLWithPath: videosPath).appendingPathComponent(videoName).path
             let imgName = (videoPath as NSString).lastPathComponent + ".jpg"
             let outputPath = (imgPath as NSString).appendingPathComponent(imgName)
             if FileManager.default.fileExists(atPath: outputPath) {
@@ -89,6 +95,6 @@ struct ContentView: View {
 
 #Preview {
     ContentView()
-        .environmentObject(RpsDataViewModel())
+        .environmentObject(AppState())
         .frame(width: 500, height: 400)
 }

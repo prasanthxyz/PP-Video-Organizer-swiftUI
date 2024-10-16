@@ -7,7 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		AA5A5C1D2C8079390022774C /* RpsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5A5C1C2C8079390022774C /* RpsData.swift */; };
+		AA1EB9792CC0356D00BA1E27 /* VideoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1EB9782CC0356A00BA1E27 /* VideoModel.swift */; };
+		AA1EB97B2CC0366F00BA1E27 /* GalleryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1EB97A2CC0366D00BA1E27 /* GalleryModel.swift */; };
+		AA1EB97D2CC036C800BA1E27 /* CombinationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1EB97C2CC036C500BA1E27 /* CombinationModel.swift */; };
+		AA1EB97F2CC036EF00BA1E27 /* AppConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1EB97E2CC036E800BA1E27 /* AppConfig.swift */; };
+		AA1EB9812CC0372400BA1E27 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1EB9802CC0372000BA1E27 /* AppState.swift */; };
+		AA51793C2CC063960060A770 /* WrappingStack in Frameworks */ = {isa = PBXBuildFile; productRef = AA51793B2CC063960060A770 /* WrappingStack */; };
 		AAC239F92C8053D20098CA72 /* pvorgApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAC239F82C8053D20098CA72 /* pvorgApp.swift */; };
 		AAC239FB2C8053D20098CA72 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAC239FA2C8053D20098CA72 /* ContentView.swift */; };
 		AAC239FD2C8053D30098CA72 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AAC239FC2C8053D30098CA72 /* Assets.xcassets */; };
@@ -23,7 +28,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		AA5A5C1C2C8079390022774C /* RpsData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RpsData.swift; sourceTree = "<group>"; };
+		AA1EB9782CC0356A00BA1E27 /* VideoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoModel.swift; sourceTree = "<group>"; };
+		AA1EB97A2CC0366D00BA1E27 /* GalleryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryModel.swift; sourceTree = "<group>"; };
+		AA1EB97C2CC036C500BA1E27 /* CombinationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombinationModel.swift; sourceTree = "<group>"; };
+		AA1EB97E2CC036E800BA1E27 /* AppConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfig.swift; sourceTree = "<group>"; };
+		AA1EB9802CC0372000BA1E27 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 		AAC239F52C8053D20098CA72 /* pvorg.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = pvorg.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AAC239F82C8053D20098CA72 /* pvorgApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pvorgApp.swift; sourceTree = "<group>"; };
 		AAC239FA2C8053D20098CA72 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; tabWidth = 4; };
@@ -45,6 +54,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AA51793C2CC063960060A770 /* WrappingStack in Frameworks */,
 				AAC39E092C836F5A00FE98A8 /* AVKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -52,6 +62,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		AA1EB9772CC0356300BA1E27 /* DataModels */ = {
+			isa = PBXGroup;
+			children = (
+				AA1EB97C2CC036C500BA1E27 /* CombinationModel.swift */,
+				AA1EB97A2CC0366D00BA1E27 /* GalleryModel.swift */,
+				AA1EB9782CC0356A00BA1E27 /* VideoModel.swift */,
+				AA1EB97E2CC036E800BA1E27 /* AppConfig.swift */,
+			);
+			path = DataModels;
+			sourceTree = "<group>";
+		};
 		AAC239EC2C8053D20098CA72 = {
 			isa = PBXGroup;
 			children = (
@@ -72,6 +93,8 @@
 		AAC239F72C8053D20098CA72 /* pvorg */ = {
 			isa = PBXGroup;
 			children = (
+				AA1EB9772CC0356300BA1E27 /* DataModels */,
+				AAF10A852CBFADF900799442 /* GlobalState */,
 				AAC239FC2C8053D30098CA72 /* Assets.xcassets */,
 				AAF1E0A22C80F75500E60D65 /* ConfigTabContentView.swift */,
 				AAC239FA2C8053D20098CA72 /* ContentView.swift */,
@@ -79,7 +102,6 @@
 				AAC239FE2C8053D30098CA72 /* Preview Content */,
 				AAC23A012C8053D30098CA72 /* pvorg.entitlements */,
 				AAC239F82C8053D20098CA72 /* pvorgApp.swift */,
-				AA5A5C1C2C8079390022774C /* RpsData.swift */,
 				AAF1E0A82C81AAA400E60D65 /* TgpView.swift */,
 				AAF1E0A42C81A44500E60D65 /* VideoTgpView.swift */,
 				AAF1E0A02C80F58F00E60D65 /* ViewTabContentView.swift */,
@@ -105,6 +127,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		AAF10A852CBFADF900799442 /* GlobalState */ = {
+			isa = PBXGroup;
+			children = (
+				AA1EB9802CC0372000BA1E27 /* AppState.swift */,
+			);
+			path = GlobalState;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -122,6 +152,7 @@
 			);
 			name = pvorg;
 			packageProductDependencies = (
+				AA51793B2CC063960060A770 /* WrappingStack */,
 			);
 			productName = pvorg;
 			productReference = AAC239F52C8053D20098CA72 /* pvorg.app */;
@@ -152,6 +183,7 @@
 			);
 			mainGroup = AAC239EC2C8053D20098CA72;
 			packageReferences = (
+				AA51793A2CC063960060A770 /* XCRemoteSwiftPackageReference "swiftui-wrapping-stack" */,
 			);
 			productRefGroup = AAC239F62C8053D20098CA72 /* Products */;
 			projectDirPath = "";
@@ -181,12 +213,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				AAC239FB2C8053D20098CA72 /* ContentView.swift in Sources */,
-				AA5A5C1D2C8079390022774C /* RpsData.swift in Sources */,
+				AA1EB97F2CC036EF00BA1E27 /* AppConfig.swift in Sources */,
 				AAF1E0A32C80F75500E60D65 /* ConfigTabContentView.swift in Sources */,
 				AAF1E0B52C821C2000E60D65 /* VideoView.swift in Sources */,
+				AA1EB9812CC0372400BA1E27 /* AppState.swift in Sources */,
+				AA1EB97D2CC036C800BA1E27 /* CombinationModel.swift in Sources */,
 				AAF1E0AB2C81AC1000E60D65 /* GallerySlideshowView.swift in Sources */,
 				AAC239F92C8053D20098CA72 /* pvorgApp.swift in Sources */,
 				AAF1E0A52C81A44500E60D65 /* VideoTgpView.swift in Sources */,
+				AA1EB9792CC0356D00BA1E27 /* VideoModel.swift in Sources */,
+				AA1EB97B2CC0366F00BA1E27 /* GalleryModel.swift in Sources */,
 				AAF1E0A12C80F58F00E60D65 /* ViewTabContentView.swift in Sources */,
 				AAF1E0A92C81AAA400E60D65 /* TgpView.swift in Sources */,
 			);
@@ -395,6 +431,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		AA51793A2CC063960060A770 /* XCRemoteSwiftPackageReference "swiftui-wrapping-stack" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/diniska/swiftui-wrapping-stack";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.1.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		AA51793B2CC063960060A770 /* WrappingStack */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AA51793A2CC063960060A770 /* XCRemoteSwiftPackageReference "swiftui-wrapping-stack" */;
+			productName = WrappingStack;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = AAC239ED2C8053D20098CA72 /* Project object */;
 }

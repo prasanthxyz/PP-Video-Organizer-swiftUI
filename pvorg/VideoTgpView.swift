@@ -1,11 +1,11 @@
 import SwiftUI
 
 struct VideoTgpView: View {
-    @EnvironmentObject var rpsData: RpsDataViewModel
+    @EnvironmentObject var appState: AppState
 
     var body: some View {
-        if !rpsData.data.combinations.isEmpty {
-            if (rpsData.data.isTgpShown) {
+        if !appState.combinations.isEmpty {
+            if appState.isTgpShown {
                 TgpView()
             } else {
                 VideoView()
@@ -16,6 +16,6 @@ struct VideoTgpView: View {
 
 #Preview {
     VideoTgpView()
-        .environmentObject(RpsDataViewModel())
+        .environmentObject(AppState())
         .frame(width: 500, height: 400)
 }

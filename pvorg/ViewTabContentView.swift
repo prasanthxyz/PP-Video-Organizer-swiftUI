@@ -1,10 +1,10 @@
 import SwiftUI
 
 struct ViewTabContentView: View {
-    @EnvironmentObject var rpsData: RpsDataViewModel
+    @EnvironmentObject var appState: AppState
 
     var body: some View {
-        if rpsData.data.combinations.isEmpty {
+        if appState.combinations.isEmpty {
             VStack {
                 Text("No combinations found.")
                     .font(.title)
@@ -14,19 +14,19 @@ struct ViewTabContentView: View {
                 VStack {
                     HStack {
                         HStack {
-                            Text(rpsData.data.getCurrentCombination().videoName)
+                            Text(appState.getCurrentCombination()?.video.filename ?? "")
                             Spacer()
                             Button(action: {
-                                if (rpsData.data.isTgpShown) {
-                                    if (!rpsData.data.isVideoPlaying) {
-                                        rpsData.data.isVideoPlaying.toggle()
+                                if appState.isTgpShown {
+                                    if !appState.isVideoPlaying {
+                                        appState.isVideoPlaying.toggle()
                                     }
                                 } else {
-                                    if (rpsData.data.isVideoPlaying) {
-                                        rpsData.data.isVideoPlaying.toggle()
+                                    if appState.isVideoPlaying {
+                                        appState.isVideoPlaying.toggle()
                                     }
                                 }
-                                rpsData.data.isTgpShown.toggle()
+                                appState.isTgpShown.toggle()
                             }) {
                                 Text("TGP/VID")
                             }
@@ -36,23 +36,23 @@ struct ViewTabContentView: View {
 
                         HStack {
                             Button(action: {
-                                rpsData.data.isVideoPlaying = false
-                                rpsData.data.isTgpShown = true
-                                rpsData.data.moveToPrevCombination()
+                                appState.isVideoPlaying = false
+                                appState.isTgpShown = true
+                                appState.moveToPrevCombination()
                             }) {
                                 Text("Prev")
                             }
                             .keyboardShortcut("b", modifiers: [])
                             Button(action: {
-                                rpsData.data.isVideoPlaying = false
-                                rpsData.data.isTgpShown = true
-                                rpsData.data.moveToNextCombination()
+                                appState.isVideoPlaying = false
+                                appState.isTgpShown = true
+                                appState.moveToNextCombination()
                             }) {
                                 Text("Next")
                             }
                             .keyboardShortcut("n", modifiers: [])
                             Spacer()
-                            Text(rpsData.data.getCurrentCombination().galleryName)
+                            Text(appState.getCurrentCombination()?.gallery.name ?? "")
                         }
                         .frame(width: geometry.size.width * 0.25)
                     }
@@ -73,6 +73,6 @@ struct ViewTabContentView: View {
 
 #Preview {
     ViewTabContentView()
-        .environmentObject(RpsDataViewModel())
+        .environmentObject(AppState())
         .frame(width: 500, height: 400)
 }
