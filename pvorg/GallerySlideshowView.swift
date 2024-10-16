@@ -52,6 +52,7 @@ struct GallerySlideshowView: View {
         self.currentImageIndex = 0
         let galleryName = rpsData.data.getCurrentCombination().galleryName
         images = rpsData.data.galleryImages[galleryName] ?? []
+        images.shuffle()
         timer = Timer.scheduledTimer(withTimeInterval: 2.0, repeats: true) { _ in
             withAnimation {
                 currentImageIndex = (currentImageIndex + 1) % images.count
