@@ -50,7 +50,7 @@ struct GallerySlideshowView: View {
         timer?.invalidate()
         timer = nil
         self.currentImageIndex = 0
-        images = appState.getCurrentCombination()?.gallery.imageFiles ?? []
+        images = appState.getCurrentCombination()?.gallery.imageFiles.shuffled() ?? []
         timer = Timer.scheduledTimer(withTimeInterval: 2.0, repeats: true) { _ in
             withAnimation {
                 currentImageIndex = (currentImageIndex + 1) % images.count
