@@ -12,7 +12,6 @@
 		AA1EB97D2CC036C800BA1E27 /* CombinationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1EB97C2CC036C500BA1E27 /* CombinationModel.swift */; };
 		AA1EB97F2CC036EF00BA1E27 /* AppConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1EB97E2CC036E800BA1E27 /* AppConfig.swift */; };
 		AA1EB9812CC0372400BA1E27 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1EB9802CC0372000BA1E27 /* AppState.swift */; };
-		AA5179372CC0609C0060A770 /* WrappingHStack in Frameworks */ = {isa = PBXBuildFile; productRef = AA5179362CC0609C0060A770 /* WrappingHStack */; };
 		AA51793C2CC063960060A770 /* WrappingStack in Frameworks */ = {isa = PBXBuildFile; productRef = AA51793B2CC063960060A770 /* WrappingStack */; };
 		AAC239F92C8053D20098CA72 /* pvorgApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAC239F82C8053D20098CA72 /* pvorgApp.swift */; };
 		AAC239FB2C8053D20098CA72 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAC239FA2C8053D20098CA72 /* ContentView.swift */; };
@@ -56,7 +55,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				AA51793C2CC063960060A770 /* WrappingStack in Frameworks */,
-				AA5179372CC0609C0060A770 /* WrappingHStack in Frameworks */,
 				AAC39E092C836F5A00FE98A8 /* AVKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -154,7 +152,6 @@
 			);
 			name = pvorg;
 			packageProductDependencies = (
-				AA5179362CC0609C0060A770 /* WrappingHStack */,
 				AA51793B2CC063960060A770 /* WrappingStack */,
 			);
 			productName = pvorg;
@@ -186,7 +183,6 @@
 			);
 			mainGroup = AAC239EC2C8053D20098CA72;
 			packageReferences = (
-				AA5179352CC0609C0060A770 /* XCRemoteSwiftPackageReference "WrappingHStack" */,
 				AA51793A2CC063960060A770 /* XCRemoteSwiftPackageReference "swiftui-wrapping-stack" */,
 			);
 			productRefGroup = AAC239F62C8053D20098CA72 /* Products */;
@@ -437,14 +433,6 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		AA5179352CC0609C0060A770 /* XCRemoteSwiftPackageReference "WrappingHStack" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/dkk/WrappingHStack";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 2.2.11;
-			};
-		};
 		AA51793A2CC063960060A770 /* XCRemoteSwiftPackageReference "swiftui-wrapping-stack" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/diniska/swiftui-wrapping-stack";
@@ -456,11 +444,6 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		AA5179362CC0609C0060A770 /* WrappingHStack */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = AA5179352CC0609C0060A770 /* XCRemoteSwiftPackageReference "WrappingHStack" */;
-			productName = WrappingHStack;
-		};
 		AA51793B2CC063960060A770 /* WrappingStack */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = AA51793A2CC063960060A770 /* XCRemoteSwiftPackageReference "swiftui-wrapping-stack" */;

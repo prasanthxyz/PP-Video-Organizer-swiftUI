@@ -56,6 +56,8 @@ class AppState: ObservableObject {
                 }
             }
         }
+
+        combinations.shuffle()
     }
 
     func getCurrentCombination() -> Combination? {
