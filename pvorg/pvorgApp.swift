@@ -8,6 +8,9 @@ struct pvorgApp: App {
         WindowGroup {
             ContentView()
                 .environmentObject(appState)
+                .onAppear {
+                    NSApp.appearance = NSAppearance(named: .darkAqua)
+                }
         }
         .commands {
             CommandGroup(replacing: .appSettings) {
