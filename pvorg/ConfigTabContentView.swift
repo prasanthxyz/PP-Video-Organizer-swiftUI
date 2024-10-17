@@ -8,27 +8,6 @@ struct ConfigTabContentView: View {
         HStack {
             ScrollView {
                 VStack(alignment: .leading, spacing: 16) {
-                    Text("Select Studios")
-                        .font(.headline)
-
-                    WrappingHStack(id: \.self, alignment: .leading, horizontalSpacing: 10, verticalSpacing: 5) {
-                        let studios = appState.videos.map({ $0.studio }).unique().sorted()
-                        ForEach(studios, id: \.self) { studio in
-                            TagView(
-                                label: studio,
-                                isSelected: appState.selectedStudios.contains(studio),
-                                onTap: {
-                                    if appState.selectedStudios.contains(studio) {
-                                        appState.selectedStudios.remove(studio)
-                                    } else {
-                                        appState.selectedStudios.insert(studio)
-                                    }
-                                    appState.generateCombinations()
-                                }
-                            )
-                        }
-                    }
-
                     Text("Select Galleries")
                         .font(.headline)
 
@@ -64,6 +43,27 @@ struct ConfigTabContentView: View {
                                         appState.selectedTags.remove(tag)
                                     } else {
                                         appState.selectedTags.insert(tag)
+                                    }
+                                    appState.generateCombinations()
+                                }
+                            )
+                        }
+                    }
+
+                    Text("Select Studios")
+                        .font(.headline)
+
+                    WrappingHStack(id: \.self, alignment: .leading, horizontalSpacing: 10, verticalSpacing: 5) {
+                        let studios = appState.videos.map({ $0.studio }).unique().sorted()
+                        ForEach(studios, id: \.self) { studio in
+                            TagView(
+                                label: studio,
+                                isSelected: appState.selectedStudios.contains(studio),
+                                onTap: {
+                                    if appState.selectedStudios.contains(studio) {
+                                        appState.selectedStudios.remove(studio)
+                                    } else {
+                                        appState.selectedStudios.insert(studio)
                                     }
                                     appState.generateCombinations()
                                 }
@@ -112,7 +112,7 @@ struct ConfigTabContentView: View {
                         LazyVStack {
                             ForEach(appState.combinations.prefix(10), id: \.self) { combination in
                                 HStack {
-                                    Text(combination.video.title)
+                                    Text(combination.video.filename)
                                     Spacer()
                                     Text(combination.gallery.name)
                                 }
