@@ -4,6 +4,7 @@ struct ContentView: View {
     @EnvironmentObject var appState: AppState
     @State private var isSettingup = true
     @State private var settingUpMessage = ""
+    @State private var selectedTab = 0
 
     var body: some View {
         if isSettingup {
@@ -19,16 +20,32 @@ struct ContentView: View {
                 setupDataDirs()
             }
         } else {
-            TabView {
+            TabView(selection: $selectedTab) {
                 ViewTabContentView()
                     .tabItem {
                         Label("View", systemImage: "list.dash")
                     }
+                    .tag(0)
 
                 ConfigTabContentView()
                     .tabItem {
                         Label("Config", systemImage: "list.dash")
                     }
+                    .tag(1)
+            }
+            .onAppear {
+                NSEvent.addLocalMonitorForEvents(matching: [.keyDown]) { event in
+                    switch event.charactersIgnoringModifiers {
+                    case "v":
+                        selectedTab = 0
+                        return nil
+                    case "c":
+                        selectedTab = 1
+                        return nil
+                    default:
+                        return event
+                    }
+                }
             }
         }
     }
