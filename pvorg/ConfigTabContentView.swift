@@ -24,6 +24,24 @@ struct ConfigTabContentView: View {
                                         appState.selectedGalleries.insert(gallery)
                                     }
                                     appState.generateCombinations()
+                                },
+                                onLongPress: {
+                                    if appState.selectedGalleries.contains(gallery) {
+                                        for gallery2 in galleries {
+                                            if !appState.selectedGalleries.contains(gallery2) {
+                                                appState.selectedGalleries.insert(gallery2)
+                                            }
+                                        }
+                                        appState.selectedGalleries.remove(gallery)
+                                    } else {
+                                        for gallery2 in galleries {
+                                            if appState.selectedGalleries.contains(gallery2) {
+                                                appState.selectedGalleries.remove(gallery2)
+                                            }
+                                        }
+                                        appState.selectedGalleries.insert(gallery)
+                                    }
+                                    appState.generateCombinations()
                                 }
                             )
                         }
@@ -45,7 +63,8 @@ struct ConfigTabContentView: View {
                                         appState.selectedTags.insert(tag)
                                     }
                                     appState.generateCombinations()
-                                }
+                                },
+                                onLongPress: {}
                             )
                         }
                     }
@@ -66,7 +85,8 @@ struct ConfigTabContentView: View {
                                         appState.selectedStudios.insert(studio)
                                     }
                                     appState.generateCombinations()
-                                }
+                                },
+                                onLongPress: {}
                             )
                         }
                     }
@@ -87,7 +107,8 @@ struct ConfigTabContentView: View {
                                         appState.selectedCast.insert(actor)
                                     }
                                     appState.generateCombinations()
-                                }
+                                },
+                                onLongPress: {}
                             )
                         }
                     }
@@ -136,6 +157,7 @@ struct TagView: View {
     var label: String
     var isSelected: Bool
     var onTap: () -> Void
+    var onLongPress: () -> Void
 
     var body: some View {
         Text(label)
@@ -146,6 +168,9 @@ struct TagView: View {
             .cornerRadius(20)
             .onTapGesture {
                 onTap()
+            }
+            .onLongPressGesture {
+                onLongPress()
             }
     }
 }
