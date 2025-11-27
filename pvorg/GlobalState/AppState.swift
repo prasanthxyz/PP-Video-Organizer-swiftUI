@@ -45,12 +45,13 @@ class AppState: ObservableObject {
         combinations = []
 
         for video in videos {
-            if selectedStudios.contains(video.studio)
-                && containsAll(video.actors, in: selectedCast)
-                && containsAll(video.tags, in: selectedTags)
-            {
+            let studioMatches = selectedStudios.contains(video.studio)
+            let castMatches = containsAll(itemsList: video.actors, requiredItems: selectedCast)
+            let tagsMatches = containsAll(itemsList: video.tags, requiredItems: selectedTags)
+
+            if studioMatches && castMatches && tagsMatches {
                 for gallery in galleries {
-                    if selectedGalleries.contains(gallery.name) {
+                    if selectedGalleries.contains(gallery.name) && video.relatedGalleries.contains(gallery.name) {
                         combinations.append(Combination(video: video, gallery: gallery))
                     }
                 }
@@ -88,7 +89,7 @@ class AppState: ObservableObject {
         }
     }
 
-    private func containsAll(_ list: [String], in set: Set<String>) -> Bool {
-        return set.isEmpty || set.isSubset(of: list)
+    private func containsAll(itemsList: [String], requiredItems: Set<String>) -> Bool {
+        return requiredItems.isEmpty || requiredItems.isSubset(of: Set(itemsList))
     }
 }
